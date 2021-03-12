@@ -5,6 +5,15 @@
 
 #define INTENSITY_LEVEL  2
 
+
+#define MAX7219_MAX              6
+
+const unsigned char intensity_table[MAX7219_MAX] = 
+{
+ 2,   2, 2, 2, /* 7SEGM DIGITS*/
+ 15, 15        /* LEDS */
+};
+
 const unsigned char decimal_points[6][8] = {
 /* put 0x80 instead of 0x00 to show the decimal point at position you want */
   /* 0 */ { 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00 },
@@ -213,7 +222,7 @@ void send_response(unsigned char response_code)
 #define MAX7219_DATAIN           11
 #define MAX7219_CLOCK            13
 #define MAX7219_LOAD             10
-#define MAX7219_MAX              6
+
 
 
 char seven_segments_leds[6][8] = {
@@ -283,12 +292,6 @@ void max7219_reg_init (byte reg, byte val)
 
 void max7219_set_intensity (void) 
 {
-    const unsigned char intensity_table[MAX7219_MAX] = 
-    {
-     INTENSITY_LEVEL,INTENSITY_LEVEL,
-     INTENSITY_LEVEL,INTENSITY_LEVEL,
-     INTENSITY_LEVEL,INTENSITY_LEVEL
-    }; 
     int i;
     digitalWrite(MAX7219_LOAD, LOW);
     for (i=0; i < MAX7219_MAX; i++) 
